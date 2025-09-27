@@ -9,7 +9,7 @@ package main
 import (
 	"github.com/pdcgo/shared/configs"
 	"github.com/pdcgo/shared/custom_connect"
-	"github.com/pdcgo/shared_service/services/access_service"
+	"github.com/pdcgo/shared_service"
 	"net/http"
 )
 
@@ -34,7 +34,7 @@ func InitializeApp() (*App, error) {
 	if err != nil {
 		return nil, err
 	}
-	registerHandler := access_service.NewRegister(serveMux, db, authorization, defaultInterceptor)
+	registerHandler := shared_service.NewRegister(serveMux, db, authorization, defaultInterceptor)
 	app := NewApp(serveMux, registerHandler)
 	return app, nil
 }

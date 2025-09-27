@@ -9,7 +9,7 @@ import (
 	"github.com/google/wire"
 	"github.com/pdcgo/shared/configs"
 	"github.com/pdcgo/shared/custom_connect"
-	"github.com/pdcgo/shared_service/services/access_service"
+	"github.com/pdcgo/shared_service"
 )
 
 func InitializeApp() (*App, error) {
@@ -20,7 +20,7 @@ func InitializeApp() (*App, error) {
 		NewCache,
 		NewAuthorization,
 		custom_connect.NewDefaultInterceptor,
-		access_service.NewRegister,
+		shared_service.NewRegister,
 		NewApp,
 	)
 

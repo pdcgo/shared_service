@@ -12,7 +12,7 @@ import (
 	"github.com/pdcgo/shared/interfaces/authorization_iface"
 	"github.com/pdcgo/shared/pkg/cloud_logging"
 	"github.com/pdcgo/shared/pkg/ware_cache"
-	"github.com/pdcgo/shared_service/services/access_service"
+	"github.com/pdcgo/shared_service"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
 	"gorm.io/gorm"
@@ -40,7 +40,7 @@ type App struct {
 
 func NewApp(
 	mux *http.ServeMux,
-	accessRegister access_service.RegisterHandler,
+	accessRegister shared_service.RegisterHandler,
 ) *App {
 	return &App{
 		Run: func() error {
