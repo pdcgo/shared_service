@@ -29,6 +29,10 @@ func NewRegister(
 		mux.Handle(path, handler)
 		path, handler = commonconnect.NewTeamServiceHandler(common.NewTeamService(db), defaultInterceptor)
 		mux.Handle(path, handler)
+		path, handler = commonconnect.NewShopServiceHandler(common.NewShopService(db), defaultInterceptor)
+		mux.Handle(path, handler)
+		path, handler = commonconnect.NewUserServiceHandler(common.NewUserService(db), defaultInterceptor)
+		mux.Handle(path, handler)
 
 	}
 }
