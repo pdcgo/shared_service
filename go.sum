@@ -162,6 +162,8 @@ github.com/modern-go/reflect2 v1.0.2 h1:xBagoLtFs94CBntxluKeaWgTMpvLxC4ur3nMaC9G
 github.com/modern-go/reflect2 v1.0.2/go.mod h1:yWuevngMOJpCy52FWWMvUC8ws7m/LJsjYzDa0/r8luk=
 github.com/pdcgo/schema v1.0.22 h1:+xFfDgcclzjZfcxpGCm8oN7b9f/O4pljH7SOYa6il28=
 github.com/pdcgo/schema v1.0.22/go.mod h1:7GltuV5pHouP9PkyrczpPuqo64Silxu4D2zB6gdg0pQ=
+github.com/pdcgo/schema v1.0.37 h1:QLC6/3kRSmhI1t1WWWiG1p922In9QbS7x/dx+v53HIY=
+github.com/pdcgo/schema v1.0.37/go.mod h1:7GltuV5pHouP9PkyrczpPuqo64Silxu4D2zB6gdg0pQ=
 github.com/pdcgo/shared v1.0.70 h1:Rxu/h1F7BaYbexWJpVGR7y7/Yz+xq9CGC0enppBa3mE=
 github.com/pdcgo/shared v1.0.70/go.mod h1:yTeTB3QCE5uLJTP1ru+ieQIJ+5qLroV6vB5+/VwZ1l0=
 github.com/pdcgo/v2_gots_sdk v1.3.10 h1:8rQFfldS6SRJE83VStmIWh74iNjVscr1IATLHKg9lo8=
