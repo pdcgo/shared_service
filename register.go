@@ -33,6 +33,8 @@ func NewRegister(
 		mux.Handle(path, handler)
 		path, handler = commonconnect.NewUserServiceHandler(common.NewUserService(db), defaultInterceptor)
 		mux.Handle(path, handler)
+		path, handler = commonconnect.NewWarehouseServiceHandler(common.NewWarehouseService(db), defaultInterceptor)
+		mux.Handle(path, handler)
 
 	}
 }
