@@ -3,12 +3,14 @@ package shared_service
 import (
 	"net/http"
 
+	"connectrpc.com/connect"
 	"github.com/pdcgo/schema/services/access_iface/v1/access_ifaceconnect"
 	"github.com/pdcgo/schema/services/common/v1/commonconnect"
 	"github.com/pdcgo/shared/custom_connect"
 	"github.com/pdcgo/shared/interfaces/authorization_iface"
 	"github.com/pdcgo/shared_service/services/access_service"
 	"github.com/pdcgo/shared_service/services/common"
+	"github.com/pdcgo/shared_service/services/hello_service"
 	"gorm.io/gorm"
 )
 
@@ -34,6 +36,14 @@ func NewRegister(
 		path, handler = commonconnect.NewUserServiceHandler(common.NewUserService(db), defaultInterceptor)
 		mux.Handle(path, handler)
 		path, handler = commonconnect.NewWarehouseServiceHandler(common.NewWarehouseService(db), defaultInterceptor)
+		mux.Handle(path, handler)
+
+		// custom source
+
+		path, handler = access_ifaceconnect.NewHelloServiceHandler(hello_service.NewHelloService(),
+			defaultInterceptor,
+			connect.WithInterceptors(&custom_connect.RequestSourceIntercept{}),
+		)
 		mux.Handle(path, handler)
 
 	}
