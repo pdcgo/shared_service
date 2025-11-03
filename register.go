@@ -42,7 +42,10 @@ func NewRegister(
 
 		path, handler = access_ifaceconnect.NewHelloServiceHandler(hello_service.NewHelloService(),
 			defaultInterceptor,
-			connect.WithInterceptors(&custom_connect.RequestSourceIntercept{}),
+			connect.WithInterceptors(
+				&custom_connect.RequestSourceIntercept{},
+				&custom_connect.ScopeIntercept{},
+			),
 		)
 		mux.Handle(path, handler)
 
