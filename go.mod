@@ -5,9 +5,9 @@ go 1.24.2
 require (
 	connectrpc.com/connect v1.19.0
 	github.com/google/wire v0.7.0
-	github.com/pdcgo/schema v1.0.37
-	github.com/pdcgo/shared v1.0.70
-	golang.org/x/net v0.41.0
+	github.com/pdcgo/schema v1.0.44
+	github.com/pdcgo/shared v1.0.85
+	golang.org/x/net v0.44.0
 	gorm.io/gorm v1.31.0
 )
 
@@ -20,7 +20,7 @@ require (
 	cloud.google.com/go/compute/metadata v0.6.0 // indirect
 	cloud.google.com/go/iam v1.5.0 // indirect
 	cloud.google.com/go/secretmanager v1.14.7 // indirect
-	connectrpc.com/validate v0.3.0 // indirect
+	connectrpc.com/validate v0.6.0 // indirect
 	filippo.io/edwards25519 v1.1.0 // indirect
 	github.com/GoogleCloudPlatform/cloudsql-proxy v1.37.7 // indirect
 	github.com/antlr4-go/antlr/v4 v4.13.1 // indirect
@@ -78,18 +78,18 @@ require (
 	go.uber.org/multierr v1.10.0 // indirect
 	go.uber.org/zap v1.27.0 // indirect
 	golang.org/x/arch v0.8.0 // indirect
-	golang.org/x/crypto v0.39.0 // indirect
-	golang.org/x/exp v0.0.0-20250620022241-b7579e27df2b // indirect
+	golang.org/x/crypto v0.42.0 // indirect
+	golang.org/x/exp v0.0.0-20250911091902-df9299821621 // indirect
 	golang.org/x/oauth2 v0.30.0 // indirect
-	golang.org/x/sync v0.15.0 // indirect
-	golang.org/x/sys v0.34.0 // indirect
-	golang.org/x/text v0.26.0 // indirect
+	golang.org/x/sync v0.17.0 // indirect
+	golang.org/x/sys v0.36.0 // indirect
+	golang.org/x/text v0.29.0 // indirect
 	golang.org/x/time v0.11.0 // indirect
 	google.golang.org/api v0.229.0 // indirect
 	google.golang.org/appengine v1.6.8 // indirect
 	google.golang.org/genproto v0.0.0-20250303144028-a0af3efb3deb // indirect
-	google.golang.org/genproto/googleapis/api v0.0.0-20250603155806-513f23925822 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20250603155806-513f23925822 // indirect
+	google.golang.org/genproto/googleapis/api v0.0.0-20250922171735-9219d122eba9 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20250922171735-9219d122eba9 // indirect
 	google.golang.org/grpc v1.73.0 // indirect
 	google.golang.org/protobuf v1.36.9 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
