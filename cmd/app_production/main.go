@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"net/http"
@@ -45,6 +46,12 @@ func NewApp(
 ) *App {
 	return &App{
 		Run: func() error {
+			cancel, err := custom_connect.InitTracer("shared-service")
+			if err != nil {
+				return err
+			}
+
+			defer cancel(context.Background())
 
 			accessRegister()
 
