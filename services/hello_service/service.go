@@ -14,9 +14,14 @@ type helloServiceImpl struct{}
 func (h *helloServiceImpl) Hello(
 	ctx context.Context,
 	req *connect.Request[access_iface.HelloRequest]) (*connect.Response[access_iface.HelloResponse], error) {
+	source, err := custom_connect.GetRequestSource(ctx)
+	if err != nil {
+		return nil, err
+	}
+
 	return &connect.Response[access_iface.HelloResponse]{
 		Msg: &access_iface.HelloResponse{
-			Source: custom_connect.GetRequestSource(ctx),
+			Source: source,
 		},
 	}, nil
 }
