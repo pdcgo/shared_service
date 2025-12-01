@@ -38,6 +38,9 @@ func NewRegister(
 		path, handler = commonconnect.NewWarehouseServiceHandler(common.NewWarehouseService(db), defaultInterceptor)
 		mux.Handle(path, handler)
 
+		path, handler = commonconnect.NewCustomerDataServiceHandler(common.NewCustomerDataService(db), defaultInterceptor)
+		mux.Handle(path, handler)
+
 		// custom source
 
 		path, handler = access_ifaceconnect.NewHelloServiceHandler(hello_service.NewHelloService(),
