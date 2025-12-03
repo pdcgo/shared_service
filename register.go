@@ -40,6 +40,8 @@ func NewRegister(
 
 		path, handler = commonconnect.NewCustomerDataServiceHandler(common.NewCustomerDataService(db), defaultInterceptor)
 		mux.Handle(path, handler)
+		path, handler = commonconnect.NewShipmentServiceHandler(common.NewShipmentService(db), defaultInterceptor)
+		mux.Handle(path, handler)
 
 		// custom source
 
