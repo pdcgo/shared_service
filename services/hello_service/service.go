@@ -10,6 +10,21 @@ import (
 
 type helloServiceImpl struct{}
 
+// HelloBidiStream implements access_ifaceconnect.HelloServiceHandler.
+func (h *helloServiceImpl) HelloBidiStream(context.Context, *connect.BidiStream[access_iface.HelloBidiStreamRequest, access_iface.HelloBidiStreamResponse]) error {
+	panic("unimplemented")
+}
+
+// HelloClientStream implements access_ifaceconnect.HelloServiceHandler.
+func (h *helloServiceImpl) HelloClientStream(context.Context, *connect.ClientStream[access_iface.HelloClientStreamRequest]) (*connect.Response[access_iface.HelloClientStreamResponse], error) {
+	panic("unimplemented")
+}
+
+// HelloServerStream implements access_ifaceconnect.HelloServiceHandler.
+func (h *helloServiceImpl) HelloServerStream(context.Context, *connect.Request[access_iface.HelloServerStreamRequest], *connect.ServerStream[access_iface.HelloServerStreamResponse]) error {
+	panic("unimplemented")
+}
+
 // Hello implements access_ifaceconnect.HelloServiceHandler.
 func (h *helloServiceImpl) Hello(
 	ctx context.Context,
