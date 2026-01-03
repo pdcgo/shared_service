@@ -15,8 +15,8 @@ import (
 )
 
 type MigrationHandler func() error
-
-type RegisterHandler func()
+type ServiceReflectNames []string
+type RegisterHandler func() ServiceReflectNames
 
 func NewRegister(
 	mux *http.ServeMux,
@@ -25,23 +25,35 @@ func NewRegister(
 	defaultInterceptor custom_connect.DefaultInterceptor,
 ) RegisterHandler {
 
-	return func() {
-
+	return func() ServiceReflectNames {
+		grpcReflects := ServiceReflectNames{}
 		path, handler := access_ifaceconnect.NewFrontendAccessServiceHandler(access_service.NewAccessService(db, auth), defaultInterceptor)
 		mux.Handle(path, handler)
+		grpcReflects = append(grpcReflects, access_ifaceconnect.FrontendAccessServiceName)
+
 		path, handler = commonconnect.NewTeamServiceHandler(common.NewTeamService(db), defaultInterceptor)
 		mux.Handle(path, handler)
+		grpcReflects = append(grpcReflects, commonconnect.TeamServiceName)
+
 		path, handler = commonconnect.NewShopServiceHandler(common.NewShopService(db), defaultInterceptor)
 		mux.Handle(path, handler)
+		grpcReflects = append(grpcReflects, commonconnect.ShopServiceName)
+
 		path, handler = commonconnect.NewUserServiceHandler(common.NewUserService(db), defaultInterceptor)
 		mux.Handle(path, handler)
+		grpcReflects = append(grpcReflects, commonconnect.UserServiceName)
+
 		path, handler = commonconnect.NewWarehouseServiceHandler(common.NewWarehouseService(db), defaultInterceptor)
 		mux.Handle(path, handler)
+		grpcReflects = append(grpcReflects, commonconnect.WarehouseServiceName)
 
 		path, handler = commonconnect.NewCustomerDataServiceHandler(common.NewCustomerDataService(db), defaultInterceptor)
 		mux.Handle(path, handler)
+		grpcReflects = append(grpcReflects, commonconnect.CustomerDataServiceName)
+
 		path, handler = commonconnect.NewShipmentServiceHandler(common.NewShipmentService(db), defaultInterceptor)
 		mux.Handle(path, handler)
+		grpcReflects = append(grpcReflects, commonconnect.ShipmentServiceName)
 
 		// custom source
 
@@ -53,6 +65,8 @@ func NewRegister(
 			),
 		)
 		mux.Handle(path, handler)
+		grpcReflects = append(grpcReflects, access_ifaceconnect.HelloServiceName)
 
+		return grpcReflects
 	}
 }
