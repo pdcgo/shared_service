@@ -1,1 +1,1 @@
-gcloud run deploy shared-service --source .
+gcloud run deploy shared-service --source . --no-traffic
