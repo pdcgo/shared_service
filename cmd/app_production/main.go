@@ -15,6 +15,7 @@ import (
 	"github.com/pdcgo/shared/pkg/cloud_logging"
 	"github.com/pdcgo/shared/pkg/ware_cache"
 	"github.com/pdcgo/shared_service"
+	"github.com/pdcgo/user_service"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
 	"gorm.io/gorm"
@@ -43,6 +44,8 @@ type App struct {
 func NewApp(
 	mux *http.ServeMux,
 	accessRegister shared_service.RegisterHandler,
+	userServiceRegister user_service.RegisterHandler,
+	reflectRegister custom_connect.RegisterReflectFunc,
 ) *App {
 	return &App{
 		Run: func() error {
@@ -53,7 +56,12 @@ func NewApp(
 
 			defer cancel(context.Background())
 
-			accessRegister()
+			var grpcReflectNames []string
+
+			grpcReflectNames = append(grpcReflectNames, accessRegister()...)
+			grpcReflectNames = append(grpcReflectNames, userServiceRegister()...)
+
+			reflectRegister(grpcReflectNames)
 
 			port := os.Getenv("PORT")
 			if port == "" {
