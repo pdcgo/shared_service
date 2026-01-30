@@ -10,7 +10,7 @@ import (
 	"github.com/pdcgo/shared/configs"
 	"github.com/pdcgo/shared/custom_connect"
 	"github.com/pdcgo/shared_service"
-	"github.com/pdcgo/user_service"
+	"github.com/pdcgo/shared_service/services/user_service"
 	"net/http"
 )
 
@@ -31,11 +31,15 @@ func InitializeApp() (*App, error) {
 		return nil, err
 	}
 	authorization := NewAuthorization(appConfig, db, cache)
+	client, err := NewFirestoreClient()
+	if err != nil {
+		return nil, err
+	}
 	defaultInterceptor, err := custom_connect.NewDefaultInterceptor()
 	if err != nil {
 		return nil, err
 	}
-	registerHandler := shared_service.NewRegister(serveMux, db, authorization, defaultInterceptor)
+	registerHandler := shared_service.NewRegister(serveMux, db, authorization, client, defaultInterceptor)
 	user_serviceRegisterHandler := user_service.NewRegister(db, appConfig, authorization, serveMux, defaultInterceptor)
 	registerReflectFunc := custom_connect.NewRegisterReflect(serveMux)
 	app := NewApp(serveMux, registerHandler, user_serviceRegisterHandler, registerReflectFunc)

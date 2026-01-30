@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 
+	"cloud.google.com/go/firestore"
 	"github.com/pdcgo/shared/authorization"
 	"github.com/pdcgo/shared/configs"
 	"github.com/pdcgo/shared/custom_connect"
@@ -15,11 +16,15 @@ import (
 	"github.com/pdcgo/shared/pkg/cloud_logging"
 	"github.com/pdcgo/shared/pkg/ware_cache"
 	"github.com/pdcgo/shared_service"
-	"github.com/pdcgo/user_service"
+	"github.com/pdcgo/shared_service/services/user_service"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
 	"gorm.io/gorm"
 )
+
+func NewFirestoreClient() (*firestore.Client, error) {
+	return firestore.NewClient(context.Background(), os.Getenv("GOOGLE_CLOUD_PROJECT"))
+}
 
 func NewDatabase(cfg *configs.AppConfig) (*gorm.DB, error) {
 	return db_connect.NewProductionDatabase("shared_service", &cfg.Database)

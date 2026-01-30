@@ -13,6 +13,31 @@ type shipmentServiceImpl struct {
 	db *gorm.DB
 }
 
+// PublicShipmentList implements commonconnect.ShipmentServiceHandler.
+func (s *shipmentServiceImpl) PublicShipmentList(
+	ctx context.Context,
+	req *connect.Request[common.PublicShipmentListRequest],
+) (*connect.Response[common.PublicShipmentListResponse], error) {
+	var err error
+
+	db := s.db.WithContext(ctx)
+	result := &common.PublicShipmentListResponse{
+		Data: []*common.Shipment{},
+	}
+
+	err = db.
+		Model(&db_models.Shipping{}).
+		Find(&result.Data).
+		Error
+
+	if err != nil {
+		return nil, err
+	}
+
+	return connect.NewResponse(result), nil
+
+}
+
 // PublicShipmentIDs implements commonconnect.ShipmentServiceHandler.
 func (s *shipmentServiceImpl) PublicShipmentIDs(
 	ctx context.Context,

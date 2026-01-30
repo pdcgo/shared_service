@@ -10,13 +10,14 @@ import (
 	"github.com/pdcgo/shared/configs"
 	"github.com/pdcgo/shared/custom_connect"
 	"github.com/pdcgo/shared_service"
-	"github.com/pdcgo/user_service"
+	"github.com/pdcgo/shared_service/services/user_service"
 )
 
 func InitializeApp() (*App, error) {
 	wire.Build(
 		http.NewServeMux,
 		configs.NewProductionConfig,
+		NewFirestoreClient,
 		NewDatabase,
 		NewCache,
 		NewAuthorization,

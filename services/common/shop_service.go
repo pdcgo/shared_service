@@ -62,6 +62,10 @@ func (s *shopServiceImpl) PublicShopList(ctx context.Context, req *connect.Reque
 			Where("lower(mp_name) like ? or lower(mp_username) like ?", q, q)
 	}
 
+	if pay.UserId == 0 {
+		query = query.Where("user_id = ?", pay.UserId)
+	}
+
 	query = query.
 		Select([]string{
 			"id",
