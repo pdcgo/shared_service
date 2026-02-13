@@ -39,7 +39,7 @@ func InitializeApp() (*App, error) {
 	if err != nil {
 		return nil, err
 	}
-	registerHandler := shared_service.NewRegister(serveMux, db, authorization, client, defaultInterceptor)
+	registerHandler := shared_service.NewRegister(serveMux, db, appConfig, authorization, client, defaultInterceptor)
 	user_serviceRegisterHandler := user_service.NewRegister(db, appConfig, authorization, serveMux, defaultInterceptor)
 	registerReflectFunc := custom_connect.NewRegisterReflect(serveMux)
 	app := NewApp(serveMux, registerHandler, user_serviceRegisterHandler, registerReflectFunc)

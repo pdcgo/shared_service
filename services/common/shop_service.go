@@ -63,7 +63,12 @@ func (s *shopServiceImpl) PublicShopList(ctx context.Context, req *connect.Reque
 	}
 
 	if pay.UserId != 0 {
-		query = query.Where("user_id = ?", pay.UserId)
+		shopQuery := db.
+			Table("user_marketplaces").
+			Select("1").
+			Where("user_marketplaces.marketplace_id = marketplaces.id and user_marketplaces.user_id = ?", pay.UserId)
+
+		query = query.Where("EXISTS (?)", shopQuery)
 	}
 
 	query = query.

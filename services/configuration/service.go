@@ -11,8 +11,9 @@ import (
 )
 
 type configrationServiceImpl struct {
-	auth   authorization_iface.Authorization
-	client *firestore.Client
+	ghToken string
+	auth    authorization_iface.Authorization
+	client  *firestore.Client
 }
 
 // ExtensionConfiguration implements access_ifaceconnect.ConfigurationServiceHandler.
@@ -80,6 +81,7 @@ func (c *configrationServiceImpl) ExtensionConfigurationReplace(
 func NewConfigurationService(
 	auth authorization_iface.Authorization,
 	client *firestore.Client,
+	ghToken string,
 ) *configrationServiceImpl {
-	return &configrationServiceImpl{auth, client}
+	return &configrationServiceImpl{ghToken, auth, client}
 }

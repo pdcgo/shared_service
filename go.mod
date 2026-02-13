@@ -8,8 +8,8 @@ require (
 	connectrpc.com/connect v1.19.1
 	github.com/golang/protobuf v1.5.4
 	github.com/google/wire v0.7.0
-	github.com/pdcgo/schema v1.0.101
-	github.com/pdcgo/shared v1.0.121
+	github.com/pdcgo/schema v1.0.107
+	github.com/pdcgo/shared v1.0.122
 	golang.org/x/crypto v0.45.0
 	golang.org/x/net v0.47.0
 	google.golang.org/protobuf v1.36.11

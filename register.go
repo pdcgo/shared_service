@@ -7,6 +7,7 @@ import (
 	"connectrpc.com/connect"
 	"github.com/pdcgo/schema/services/access_iface/v1/access_ifaceconnect"
 	"github.com/pdcgo/schema/services/common/v1/commonconnect"
+	"github.com/pdcgo/shared/configs"
 	"github.com/pdcgo/shared/custom_connect"
 	"github.com/pdcgo/shared/interfaces/authorization_iface"
 	"github.com/pdcgo/shared_service/services/access_service"
@@ -23,6 +24,7 @@ type RegisterHandler func() ServiceReflectNames
 func NewRegister(
 	mux *http.ServeMux,
 	db *gorm.DB,
+	cfg *configs.AppConfig,
 	auth authorization_iface.Authorization,
 	firestoreClient *firestore.Client,
 	defaultInterceptor custom_connect.DefaultInterceptor,
@@ -60,7 +62,7 @@ func NewRegister(
 
 		// global configuration service
 		path, handler = access_ifaceconnect.NewConfigurationServiceHandler(
-			configuration.NewConfigurationService(auth, firestoreClient),
+			configuration.NewConfigurationService(auth, firestoreClient, cfg.GithubToken),
 		)
 		mux.Handle(path, handler)
 		grpcReflects = append(grpcReflects, access_ifaceconnect.ConfigurationServiceName)

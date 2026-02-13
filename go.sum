@@ -181,8 +181,12 @@ github.com/modern-go/reflect2 v1.0.2 h1:xBagoLtFs94CBntxluKeaWgTMpvLxC4ur3nMaC9G
 github.com/modern-go/reflect2 v1.0.2/go.mod h1:yWuevngMOJpCy52FWWMvUC8ws7m/LJsjYzDa0/r8luk=
 github.com/pdcgo/schema v1.0.101 h1:Ckfb4eOueuFjLvYtPrALOatlqJdk8ZHrpeaj5OTtnVY=
 github.com/pdcgo/schema v1.0.101/go.mod h1:PFVdZ4apphj9eQ3JPMhf8plHqRn2gB9sOyCzy/Iz50M=
+github.com/pdcgo/schema v1.0.107 h1://tZyU5TxbcEHcmbsWajk6ERPxQBpZpL5/+V63Zr/Tw=
+github.com/pdcgo/schema v1.0.107/go.mod h1:PFVdZ4apphj9eQ3JPMhf8plHqRn2gB9sOyCzy/Iz50M=
 github.com/pdcgo/shared v1.0.121 h1:nMfRUMoix5W9ckHZXPVyiYcC/m8YcUIGlSG+FlItXZI=
 github.com/pdcgo/shared v1.0.121/go.mod h1:bEhNrVfDNSOPR7ekV0CvnsRR/4WgSOc2mzIUrGZ8Eyg=
+github.com/pdcgo/shared v1.0.122 h1:6BcYVC43ENEoyZtlgE+Ukp4/TaC+D8TCgTnqYXZeYOg=
+github.com/pdcgo/shared v1.0.122/go.mod h1:bEhNrVfDNSOPR7ekV0CvnsRR/4WgSOc2mzIUrGZ8Eyg=
 github.com/pdcgo/v2_gots_sdk v1.3.10 h1:8rQFfldS6SRJE83VStmIWh74iNjVscr1IATLHKg9lo8=
 github.com/pdcgo/v2_gots_sdk v1.3.10/go.mod h1:nqDzEP3OcyGuvHrA/r4VbR3972JKdII/AOEoY1yy7Kk=
 github.com/pelletier/go-toml/v2 v2.2.4 h1:mye9XuhQ6gvn5h28+VilKrrPoQVanw5PMw/TB0t5Ec4=
