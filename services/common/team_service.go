@@ -72,21 +72,40 @@ func (t *teamServiceImpl) PublicTeamIDs(
 	db := t.db.WithContext(ctx)
 	pay := req.Msg
 
-	teams := []*common.Team{}
+	teams := []*db_models.Team{}
+
 	err = db.
 		Model(db_models.Team{}).
-		Select([]string{
-			"id",
-			"name",
-			"team_code",
-			"type",
-		}).
+		Preload("TeamInfo").
 		Where("id in ?", pay.Ids).
 		Find(&teams).
 		Error
 
 	for _, d := range teams {
-		result.Data[d.Id] = d
+		info := &common.TeamInfo{}
+		if d.TeamInfo != nil {
+			info = &common.TeamInfo{
+				TeamId:        uint64(d.ID),
+				ContactNumber: d.TeamInfo.ContactNumber,
+			}
+
+			if d.TeamInfo.ReturnWarehouseID != nil {
+				info.ReturnWarehouseId = uint64(*d.TeamInfo.ReturnWarehouseID)
+			}
+
+			if d.TeamInfo.ReturnUserID != nil {
+				info.ReturnUserId = uint64(*d.TeamInfo.ReturnUserID)
+			}
+
+		}
+
+		result.Data[uint64(d.ID)] = &common.Team{
+			Id:       uint64(d.ID),
+			Name:     d.Name,
+			TeamCode: string(d.TeamCode),
+			Type:     string(d.Type),
+			Info:     info,
+		}
 	}
 
 	return connect.NewResponse(&result), err
