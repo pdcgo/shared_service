@@ -17,6 +17,7 @@ import (
 	"github.com/pdcgo/shared/pkg/ware_cache"
 	"github.com/pdcgo/shared_service"
 	"github.com/pdcgo/shared_service/services/user_service"
+	"github.com/redis/go-redis/v9"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
 	"gorm.io/gorm"
@@ -28,6 +29,10 @@ func NewFirestoreClient() (*firestore.Client, error) {
 
 func NewDatabase(cfg *configs.AppConfig) (*gorm.DB, error) {
 	return db_connect.NewProductionDatabase("shared_service", &cfg.Database)
+}
+
+func NewRedisDatabase(cfg *configs.AppConfig) (*redis.Client, error) {
+	return db_connect.NewRedisDatabase(&cfg.RedisConfig), nil
 }
 
 func NewCache() (ware_cache.Cache, error) {

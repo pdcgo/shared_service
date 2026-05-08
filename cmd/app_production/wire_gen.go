@@ -7,6 +7,7 @@
 package main
 
 import (
+	"github.com/pdcgo/san_collection/san_mcp"
 	"github.com/pdcgo/shared/configs"
 	"github.com/pdcgo/shared/custom_connect"
 	"github.com/pdcgo/shared_service"
@@ -40,7 +41,12 @@ func InitializeApp() (*App, error) {
 		return nil, err
 	}
 	registerHandler := shared_service.NewRegister(serveMux, db, appConfig, authorization, client, defaultInterceptor)
-	user_serviceRegisterHandler := user_service.NewRegister(db, appConfig, authorization, serveMux, defaultInterceptor)
+	redisClient, err := NewRedisDatabase(appConfig)
+	if err != nil {
+		return nil, err
+	}
+	mcpSessionManager := san_mcp.NewMcpSessionManager(redisClient)
+	user_serviceRegisterHandler := user_service.NewRegister(db, appConfig, authorization, serveMux, defaultInterceptor, mcpSessionManager)
 	registerReflectFunc := custom_connect.NewRegisterReflect(serveMux)
 	app := NewApp(serveMux, registerHandler, user_serviceRegisterHandler, registerReflectFunc)
 	return app, nil

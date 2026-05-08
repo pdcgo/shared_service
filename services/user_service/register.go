@@ -3,6 +3,7 @@ package user_service
 import (
 	"net/http"
 
+	"github.com/pdcgo/san_collection/san_mcp"
 	"github.com/pdcgo/schema/services/user_iface/v1/user_ifaceconnect"
 	"github.com/pdcgo/shared/configs"
 	"github.com/pdcgo/shared/custom_connect"
@@ -21,13 +22,14 @@ func NewRegister(
 	auth authorization_iface.Authorization,
 	mux *http.ServeMux,
 	defaultInterceptor custom_connect.DefaultInterceptor,
+	sessionManager *san_mcp.McpSessionManager,
 	// cache ware_cache.Cache,
 	// dispather report.ReportDispatcher,
 ) RegisterHandler {
 	return func() ServiceReflectNames {
 		grpcReflects := ServiceReflectNames{}
 
-		path, handler := user_ifaceconnect.NewAuthServiceHandler(auth_srv.NewAuthService(db, auth, cfg.JwtSecret))
+		path, handler := user_ifaceconnect.NewAuthServiceHandler(auth_srv.NewAuthService(db, auth, sessionManager, cfg.JwtSecret))
 		mux.Handle(path, handler)
 		grpcReflects = append(grpcReflects, user_ifaceconnect.AuthServiceName)
 
