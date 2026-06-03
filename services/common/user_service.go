@@ -33,11 +33,13 @@ func (u *userServiceImpl) PublicUserIDs(
 	items := []*common.User{}
 	err = query.
 		Table("users u").
+		Joins("join user_teams ut on ut.user_id = u.id").
 		Select([]string{
 			"u.id",
 			"u.name",
 			"u.username",
 			"u.profile_picture",
+			"ut.team_id",
 		}).
 		Where("u.id in ?", pay.Ids).
 		Find(&items).
