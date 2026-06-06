@@ -9,7 +9,7 @@ require (
 	github.com/golang/protobuf v1.5.4
 	github.com/google/wire v0.7.0
 	github.com/pdcgo/san_collection v0.0.0-20260508093232-4d6c15849caa
-	github.com/pdcgo/schema v1.0.128
+	github.com/pdcgo/schema v1.0.138
 	github.com/pdcgo/shared v1.0.134
 	github.com/redis/go-redis/v9 v9.19.0
 	golang.org/x/crypto v0.50.0
