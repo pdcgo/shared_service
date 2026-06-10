@@ -32,6 +32,10 @@ func (t *teamServiceImpl) PublicTeamList(
 	offset := page.Page*page.Limit - page.Limit
 
 	tx := db.Model(&db_models.Team{}).Where("deleted = ?", false)
+	if pay.Q != "" {
+		like := "%" + pay.Q + "%"
+		tx = tx.Where("name ILIKE ? OR team_code ILIKE ?", like, like)
+	}
 	var total int64
 	if err := tx.Count(&total).Error; err != nil {
 		return &connect.Response[common.PublicTeamListResponse]{}, err
@@ -55,6 +59,7 @@ func (t *teamServiceImpl) PublicTeamList(
 	pageCount := math.Ceil(float64(total) / float64(page.Limit))
 	result.PageInfo.CurrentPage = page.Page
 	result.PageInfo.TotalPage = int64(pageCount)
+	result.PageInfo.TotalItems = total
 
 	return connect.NewResponse(&result), nil
 }
