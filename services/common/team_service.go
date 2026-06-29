@@ -36,6 +36,14 @@ func (t *teamServiceImpl) PublicTeamList(
 		like := "%" + pay.Q + "%"
 		tx = tx.Where("name ILIKE ? OR team_code ILIKE ?", like, like)
 	}
+	switch pay.TeamType {
+	case common.TeamType_TEAM_TYPE_WAREHOUSE:
+		tx = tx.Where("type = ?", db_models.WarehouseTeamType)
+	case common.TeamType_TEAM_TYPE_SELLING:
+		tx = tx.Where("type = ?", db_models.SellingTeamType)
+	case common.TeamType_TEAM_TYPE_ADMIN:
+		tx = tx.Where("type = ?", db_models.AdminTeamType)
+	}
 	var total int64
 	if err := tx.Count(&total).Error; err != nil {
 		return &connect.Response[common.PublicTeamListResponse]{}, err
